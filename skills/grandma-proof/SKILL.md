@@ -28,12 +28,12 @@ None of them reads a manual. None knows what "dashboard", "module", "sync" or "s
 
 The target is an easy screen, not an empty one. Removing too much also confuses.
 
-- **One screen, one job.** Each screen has one main action, visible without scrolling. Other actions look quieter.
+- **One screen, one job.** Each screen has one main action, visible without scrolling. If the list is long, pin the main button to the bottom of the screen. Other actions look quieter.
 - **Fewer buttons.** Count the clicks of the most common task and try to remove one. Rare actions go under a "More" menu; unused actions go away.
 - **Less text.** Cut any text whose removal leaves nobody lost. Titles up to 5 words. Sentences up to 12 words.
 - **Keep what guides.** Always keep: where am I, what do I do now, how do I go back. Icon-only buttons only for the universal ones (close, back, search).
 - **Ask only what you must.** A field the system can figure out is not a question. Long forms become short steps with "Step 2 of 4".
-- **Choose for her.** Preselect the most common option. Advanced settings stay hidden until someone looks for them.
+- **Choose for her.** Preselect the most common option. Do not preselect when a mistake is costly (a time slot, an amount, a recipient): there she picks. Advanced settings stay hidden until someone looks for them.
 
 ### 2. Grandma
 
@@ -41,8 +41,9 @@ The target is an easy screen, not an empty one. Removing too much also confuses.
 
 - Use the word she uses at home: "sign in", not "authenticate"; "save", not "persist"; "delete", not "remove record".
 - No acronyms or technical terms on screen. If a term is unavoidable, explain it in one short sentence the first time.
-- The button says what happens: "Send order", "Delete photo". Never a bare "OK", "Confirm" or "Click here".
-- Same name for the same thing on every screen.
+- A hard name the person will meet in real life ("Cardiologist", on the office door) stays, with the plain explanation next to it: "Looks after your heart".
+- The button says what happens, with verb and object: "Send order", "Delete photo", "Confirm appointment". Never a bare word such as "OK", "Confirm", "Continue" or "Click here".
+- Same name for the same thing on every screen. Different actions get different names: the forward button may change at each step ("Choose the day", "Choose the time").
 
 **Size and reading**
 
@@ -52,8 +53,8 @@ The target is an easy screen, not an empty one. Removing too much also confuses.
 
 **Not getting lost**
 
-- Every screen shows where the person is and has a "Back" in the same spot.
-- Screen changes use a short transition (150 to 250 ms) that shows where you came from and where you went. Nothing jumps, flashes or moves on its own.
+- Every screen shows where the person is and has a "Back" in the same spot. Two exceptions: the home screen has no "Back", and the "it worked" screen leads home, not to the previous step.
+- Screen changes use a short transition (150 to 250 ms) that shows direction: the new screen enters from one side going forward and from the other going back. Nothing jumps, flashes or moves on its own.
 - After each action the screen answers right away: "Saved", "Sent". If it takes more than 1 second, show that it is working.
 - Nothing works only through a hidden gesture (swipe, long press, double tap). A visible button always does the same thing.
 
@@ -71,11 +72,11 @@ AI tends to ship crooked buttons, boxes of different sizes and text glued to but
 - **Same line.** Buttons in a group share one baseline and one height.
 - **Same size.** Buttons in a group share height, corner radius, font and padding. If widths differ a lot, match the widest.
 - **Same proportion.** Cards and boxes in a list share width and row height. Long text truncates with an ellipsis; it does not stretch the box.
-- **One ruler.** All spacing comes from one scale (4, 8, 12, 16, 24, 32, 48 px). No stray values such as 13 px or 22 px.
+- **One ruler.** All spacing between and inside elements comes from one scale (4, 8, 12, 16, 24, 32, 48 px). No stray values such as 13 px or 22 px. Button height, font size and border width have a few fixed values, repeated on every screen.
 - **One highlight.** One primary button per screen. The rest use the secondary style, always the same one.
-- **Buttons keep their distance from text.** At least 24 px between a button and any block of text. Do not stack a sentence right above or below a button.
+- **Buttons keep their distance from text.** At least 24 px between a button and any block of text. The screen's title and content may sit above the button, at that distance. What is not allowed is a helper sentence stuck to it.
 - **Buttons have no captions.** Do not put text on screen to explain a button. If a button needs explaining, its label is bad: change the label. Extra explanation goes in the hint shown on hover (`title` or tooltip, plus `aria-label` for screen readers).
-- **Check by measuring.** After building, open the screen, take a screenshot and compare heights, widths and gaps. Reading the code is not enough.
+- **Check by measuring.** After building, open the screen, take a screenshot and compare heights, widths and gaps. With no screenshot, ask the browser for the measurements (position and size of each element). Reading the code is not enough.
 
 ### 4. No AI look
 
@@ -83,7 +84,7 @@ Read [references/ai-tells.md](references/ai-tells.md) before creating a home pag
 
 - **The "GPT landing page" is banned:** a giant centered block of text with a punchy line and one italic word, a pill badge above, two buttons below and three icon cards right after.
 - Banned as reflexes: purple or blue-violet gradients, neon glow, frosted glass, gradient text, emoji in place of icons, colored shadows, cards inside cards.
-- Banned invented proof: numbers, testimonials, client logos or ratings that do not exist.
+- Banned invented proof: numbers, testimonials, client logos or ratings that do not exist. Sample data that makes the screen work (a name, an address, a list) is fine, as long as you tell the user it is sample data.
 - Banned sales talk: "Transform", "Elevate", "Revolutionize", "effortless", "It's not X. It's Y."
 - Instead: show the real product, say in plain words what it does, and put the main action near the top.
 
@@ -103,7 +104,7 @@ The person on the other side may not be a programmer, even if they use a technic
 
 ### 6. Split the work with subagents
 
-Subagents speed up the work and improve the result. Use them whenever the task has more than one part, even if nobody configured anything.
+Subagents speed up the work and improve the result. Use them whenever the task has parts two people could do at the same time without getting in each other's way (different files, research and building, building and testing), even if nobody configured anything.
 
 - **Find the tool.** Use whatever the environment offers: an agent or task tool, background agents, parallel sessions, or calling the agent itself from the command line.
 - **Split into independent parts** and launch them all at once: research, each screen, each file, tests, review.
@@ -113,7 +114,7 @@ Subagents speed up the work and improve the result. Use them whenever the task h
 - **You answer for the result.** Check what came back before saying it is done.
 - **No subagent tool:** do the same parts as separate passes, one at a time, plus a final review pass with the eyes of someone who did not write it.
 
-A one-step task (changing a word, answering a question) you just do.
+A one-step task (changing a word, answering a question) you just do. Work that fits in a single file you also do directly, and call only the reviewer at the end.
 
 ### 7. Decide without bothering the human
 
@@ -129,13 +130,15 @@ Do not go back to the human to confirm details. Every small question breaks thei
 
 With no subagent tool, run the debate yourself: write the best argument for each side, then judge.
 
+At most 3 subagent debates per task. Save them for the doubts that weigh most; the rest you decide directly, by the judge's criterion.
+
 **Ask the human only when:**
 
 - the action cannot be undone (deleting data, publishing, sending a message, spending money);
 - the answer depends on something only they know (a password, a personal preference, a business rule);
 - the request has two readings that lead to very different work.
 
-In those cases ask one question, with the options ready, and keep moving on whatever does not depend on the answer.
+In those cases ask one question, with the options ready, and keep moving on whatever does not depend on the answer. If there is no way to wait for the answer, do what the request literally says and report at the end what is left for the human to decide.
 
 ## Before you deliver: the Grandma test
 
@@ -145,7 +148,7 @@ Open the real screen and check. If any item fails, fix it before delivering.
 2. **One main action.** Does only one button draw more attention than the others?
 3. **Home words.** Is there a word Grandma would not use? Replace it.
 4. **Thick fingers.** Is everything clickable 48 px or more, with room around it?
-5. **Back.** Can you go back and undo on every screen?
+5. **Back.** Can you go back and undo on every screen except the home screen?
 6. **Ruler.** Are buttons and boxes in a group the same size and on the same line?
 7. **Button alone.** Is every button free of a sentence glued to it explaining what it does?
 8. **AI look.** Does nothing from the tells list show up?

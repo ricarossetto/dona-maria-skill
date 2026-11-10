@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clínica Vila Esperança</title>
+<style>
+  :root {
+    --verde: #0B6B4F;
+    --verde-escuro: #084F3A;
+    --verde-claro: #E6F2ED;
+    --texto: #1F2421;
+    --texto-suave: #4A534E;
+    --fundo: #FAF9F6;
+    --branco: #FFFFFF;
+    --linha: #7C857F;
+    --linha-suave: #D5DAD6;
+    --aviso: #8A2C0D;
+    --aviso-fundo: #FCEFE9;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  h1, h2, h3, p, dl, dd, ul { margin: 0; padding: 0; }
+
+  .miolo {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+
+  .coluna { max-width: 640px; }
+
+  /* Faixa de cima: o nome da clínica fica sempre no mesmo lugar */
+  .faixa {
+    background: var(--branco);
+    border-bottom: 1px solid var(--linha-suave);
+  }
+  .faixa .miolo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 64px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--verde-escuro);
+  }
+
+  .icone {
+    width: 24px;
+    height: 24px;
+    flex: none;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Telas */
+  .tela { padding-top: 16px; }
+  .tela[hidden] { display: none; }
+  .tela.entra-frente { animation: entra-frente 200ms ease-out; }
+  .tela.entra-tras { animation: entra-tras 200ms ease-out; }
+  @keyframes entra-frente {
+    from { opacity: 0; transform: translateX(16px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes entra-tras {
+    from { opacity: 0; transform: translateX(-16px); }
+    to { opacity: 1; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tela.entra-frente, .tela.entra-tras { animation: none; }
+  }
+
+  h1 {
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  h1:focus { outline: none; }
+  h2 {
+    font-size: 20px;
+    line-height: 1.25;
+    font-weight: 700;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--texto-suave);
+  }
+
+  /* Botões: um principal e um secundário, sempre iguais */
+  .botao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 12px 24px;
+    border: 2px solid var(--verde);
+    border-radius: 8px;
+    font: inherit;
+    font-weight: 700;
+    line-height: 24px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 150ms, color 150ms;
+  }
+  .botao-principal {
+    width: 100%;
+    padding: 16px 24px;
+    background: var(--verde);
+    color: var(--branco);
+  }
+  .botao-principal:hover { background: var(--verde-escuro); border-color: var(--verde-escuro); }
+  .botao-secundario {
+    background: var(--branco);
+    color: var(--verde);
+  }
+  .botao-secundario:hover { background: var(--verde-claro); }
+
+  .botao:focus-visible,
+  .telefone:focus-visible,
+  .opcao:focus-within {
+    outline: 4px solid var(--texto);
+    outline-offset: 4px;
+  }
+
+  /* Linha do Voltar: sempre no mesmo lugar */
+  .linha-voltar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+  .passo {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--texto-suave);
+  }
+
+  /* Página inicial */
+  .inicio-grade {
+    display: grid;
+    gap: 48px;
+    padding: 16px 0 48px;
+  }
+  .inicio-chamada p { margin-top: 12px; }
+  .inicio-chamada .botao { margin-top: 32px; }
+
+  .onde h2 { margin-bottom: 16px; }
+  .onde-lista {
+    list-style: none;
+    display: grid;
+    gap: 16px;
+  }
+  .onde-lista li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .onde-lista .icone { margin-top: 4px; color: var(--verde); }
+  .onde-lista strong { display: block; }
+  .telefone {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    color: var(--verde);
+    font-weight: 700;
+    border-radius: 8px;
+  }
+
+  .bloco {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--linha-suave);
+    margin-bottom: 24px;
+  }
+  .bloco[hidden] { display: none; }
+  .bloco h2 { margin-bottom: 16px; }
+  .consultas {
+    list-style: none;
+    display: grid;
+    gap: 16px;
+  }
+  .consulta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .consulta-texto strong { display: block; }
+  .recado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .recado-texto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+  }
+
+  /* Opções de escolha: mesma largura e mesma altura na lista */
+  .opcoes {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .opcao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 48px;
+    padding: 12px 16px;
+    background: var(--branco);
+    border: 2px solid var(--linha);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 150ms, border-color 150ms;
+  }
+  .opcao input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .bolinha {
+    flex: none;
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--linha);
+    border-radius: 50%;
+    background: var(--branco);
+    display: grid;
+    place-items: center;
+  }
+  .bolinha::after {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  .opcao.marcada {
+    background: var(--verde-claro);
+    border-color: var(--verde);
+  }
+  .opcao.marcada .bolinha { border-color: var(--verde); }
+  .opcao.marcada .bolinha::after { background: var(--verde); }
+  .opcao-texto { min-width: 0; }
+  .opcao-nome {
+    display: block;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .opcao-desc {
+    display: block;
+    font-size: 16px;
+    color: var(--texto-suave);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .opcoes-horas { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 12px; }
+  .opcoes-horas .opcao { padding: 12px; gap: 8px; }
+  .turno { margin-top: 24px; }
+
+  .aviso {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--aviso-fundo);
+    border: 2px solid var(--aviso);
+    border-radius: 8px;
+    color: var(--aviso);
+    font-weight: 700;
+  }
+  .aviso[hidden] { display: none; }
+
+  /* Botão principal sempre à vista, sem precisar rolar */
+  .barra {
+    position: sticky;
+    bottom: 0;
+    margin-top: 32px;
+    padding: 16px 0;
+    background: var(--fundo);
+    border-top: 1px solid var(--linha-suave);
+  }
+
+  /* Resumo da consulta */
+  .resumo {
+    margin-top: 24px;
+    border-top: 1px solid var(--linha-suave);
+  }
+  .resumo div {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--linha-suave);
+  }
+  .resumo dt { color: var(--texto-suave); }
+  .resumo dd { font-weight: 700; text-align: right; }
+
+  .pronto-titulo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .pronto-titulo .icone {
+    width: 32px;
+    height: 32px;
+    color: var(--verde);
+  }
+
+  @media (min-width: 480px) {
+    .opcoes-horas { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  }
+
+  @media (min-width: 800px) {
+    h1 { font-size: 32px; }
+    .inicio-grade {
+      grid-template-columns: 1fr 1fr;
+      align-items: start;
+      padding-top: 32px;
+    }
+    .opcoes-dias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-cruz" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/><rect x="3" y="3" width="18" height="18" rx="4"/></symbol>
+  <symbol id="i-voltar" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-agenda" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  <symbol id="i-lugar" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 0 0-14 0c0 4.800 7 11 7 11z"/><circle cx="12" cy="10" r="2.500"/></symbol>
+  <symbol id="i-relogio" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+  <symbol id="i-telefone" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.500 1.500a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></symbol>
+  <symbol id="i-certo" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.500l3 3 5-6"/></symbol>
+  <symbol id="i-atencao" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.500v.500"/></symbol>
+</svg>
+
+<header class="faixa">
+  <div class="miolo">
+    <svg class="icone" aria-hidden="true"><use href="#i-cruz"/></svg>
+    <span>Clínica Vila Esperança</span>
+  </div>
+</header>
+
+<main class="miolo">
+
+  <!-- Página inicial -->
+  <section class="tela" id="tela-inicio" data-titulo="Clínica Vila Esperança">
+
+    <div class="bloco coluna" id="bloco-consultas" hidden>
+      <h2>Suas consultas marcadas</h2>
+      <ul class="consultas" id="lista-consultas"></ul>
+    </div>
+
+    <div class="bloco coluna" id="bloco-desmarcada" hidden>
+      <div class="recado">
+        <span class="recado-texto">
+          <svg class="icone" aria-hidden="true"><use href="#i-certo"/></svg>
+          Consulta desmarcada.
+        </span>
+        <button type="button" class="botao botao-secundario" id="botao-marcar-de-novo"
+                title="Marca outra vez a consulta que você acabou de desmarcar">Marcar de novo</button>
+      </div>
+    </div>
+
+    <div class="inicio-grade">
+      <div class="inicio-chamada">
+        <h1 tabindex="-1">Marque sua consulta pela internet</h1>
+        <p>Você escolhe a especialidade, o dia e o horário.</p>
+        <button type="button" class="botao botao-principal" id="botao-comecar">
+          <svg class="icone" aria-hidden="true"><use href="#i-agenda"/></svg>
+          Marcar consulta
+        </button>
+      </div>
+
+      <div class="onde">
+        <h2>Onde fica a clínica</h2>
+        <ul class="onde-lista">
+          <li>
+            <svg class="icone" aria-hidden="true"><use href="#i-lugar"/></svg>
+            <span><strong>Endereço</strong>Rua das Acácias, 120, Vila Esperança</span>
+          </li>
+          <li>
+            <svg class="icone" aria-hidden="true"><use href="#i-relogio"/></svg>
+            <span><strong>Atendimento</strong>Segunda a sexta, das 7h às 18h.<br>Sábado, das 7h às 12h.</span>
+          </li>
+          <li>
+            <svg class="icone" aria-hidden="true"><use href="#i-telefone"/></svg>
+            <span><strong>Telefone</strong><a class="telefone" href="tel:+551155550100">(11) 5555-0100</a></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Passo 1: especialidade -->
+  <section class="tela coluna" id="tela-especialidade" data-titulo="Escolha a especialidade" hidden>
+    <div class="linha-voltar">
+      <button type="button" class="botao botao-secundario" data-voltar="inicio">
+        <svg class="icone" aria-hidden="true"><use href="#i-voltar"/></svg>Voltar
+      </button>
+      <span class="passo">Passo 1 de 4</span>
+    </div>
+    <h1 tabindex="-1">Escolha a especialidade</h1>
+    <div class="opcoes" id="opcoes-especialidade" role="radiogroup" aria-label="Especialidade"></div>
+    <div class="barra">
+      <button type="button" class="botao botao-principal" data-ir="dia">Escolher o dia</button>
+    </div>
+  </section>
+
+  <!-- Passo 2: dia -->
+  <section class="tela coluna" id="tela-dia" data-titulo="Escolha o dia" hidden>
+    <div class="linha-voltar">
+      <button type="button" class="botao botao-secundario" data-voltar="especialidade">
+        <svg class="icone" aria-hidden="true"><use href="#i-voltar"/></svg>Voltar
+      </button>
+      <span class="passo">Passo 2 de 4</span>
+    </div>
+    <h1 tabindex="-1">Escolha o dia</h1>
+    <div class="opcoes opcoes-dias" id="opcoes-dia" role="radiogroup" aria-label="Dia"></div>
+    <div class="barra">
+      <button type="button" class="botao botao-principal" data-ir="hora">Escolher o horário</button>
+    </div>
+  </section>
+
+  <!-- Passo 3: horário -->
+  <section class="tela coluna" id="tela-hora" data-titulo="Escolha o horário" hidden>
+    <div class="linha-voltar">
+      <button type="button" class="botao botao-secundario" data-voltar="dia">
+        <svg class="icone" aria-hidden="true"><use href="#i-voltar"/></svg>Voltar
+      </button>
+      <span class="passo">Passo 3 de 4</span>
+    </div>
+    <h1 tabindex="-1">Escolha o horário</h1>
+    <div class="aviso" id="aviso-hora" role="alert" hidden>
+      <svg class="icone" aria-hidden="true"><use href="#i-atencao"/></svg>
+      <span id="aviso-hora-texto">Falta escolher o horário. Toque em um deles.</span>
+    </div>
+    <div id="opcoes-hora" role="radiogroup" aria-label="Horário"></div>
+    <div class="barra">
+      <button type="button" class="botao botao-principal" id="botao-conferir">Conferir a consulta</button>
+    </div>
+  </section>
+
+  <!-- Passo 4: conferir -->
+  <section class="tela coluna" id="tela-conferir" data-titulo="Confira sua consulta" hidden>
+    <div class="linha-voltar">
+      <button type="button" class="botao botao-secundario" data-voltar="hora">
+        <svg class="icone" aria-hidden="true"><use href="#i-voltar"/></svg>Voltar
+      </button>
+      <span class="passo">Passo 4 de 4</span>
+    </div>
+    <h1 tabindex="-1">Confira sua consulta</h1>
+    <dl class="resumo" id="resumo-conferir"></dl>
+    <div class="barra">
+      <button type="button" class="botao botao-principal" id="botao-confirmar">Confirmar consulta</button>
+    </div>
+  </section>
+
+  <!-- Pronto -->
+  <section class="tela coluna" id="tela-pronto" data-titulo="Consulta marcada" hidden>
+    <h1 tabindex="-1" class="pronto-titulo">
+      <svg class="icone" aria-hidden="true"><use href="#i-certo"/></svg>
+      Consulta marcada
+    </h1>
+    <dl class="resumo" id="resumo-pronto"></dl>
+    <div class="barra">
+      <button type="button" class="botao botao-principal" data-voltar="inicio">Voltar ao início</button>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  "use strict";
+
+  /* Dados de exemplo. Troque pelos dados verdadeiros da clínica. */
+  var ESPECIALIDADES = [
+    { id: "clinico", nome: "Clínico geral", desc: "Consulta comum, para qualquer queixa" },
+    { id: "pediatra", nome: "Pediatra", desc: "Cuida de crianças" },
+    { id: "gineco", nome: "Ginecologista", desc: "Cuida da saúde da mulher" },
+    { id: "cardio", nome: "Cardiologista", desc: "Cuida do coração" },
+    { id: "dermato", nome: "Dermatologista", desc: "Cuida da pele" },
+    { id: "ortopedista", nome: "Ortopedista", desc: "Cuida de ossos e juntas" }
+  ];
+  var SEMANA = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+  var MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+  var MANHA = ["7h30", "8h", "8h30", "9h", "9h30", "10h", "10h30", "11h", "11h30"];
+  var TARDE = ["13h30", "14h", "14h30", "15h", "15h30", "16h", "16h30", "17h"];
+  var ORDEM = ["inicio", "especialidade", "dia", "hora", "conferir", "pronto"];
+
+  var dias = proximosDias(6);
+  var escolha = { especialidade: ESPECIALIDADES[0].id, dia: dias[0].id, hora: null };
+  var consultas = [];
+  var desmarcada = null;
+  var telaAtual = "inicio";
+
+  function el(id) { return document.getElementById(id); }
+
+  /* Próximos dias de atendimento, a partir de amanhã (domingo não abre). */
+  function proximosDias(quantos) {
+    var lista = [];
+    var data = new Date();
+    data.setHours(12, 0, 0, 0);
+    while (lista.length < quantos) {
+      data.setDate(data.getDate() + 1);
+      if (data.getDay() === 0) { continue; }
+      lista.push({
+        id: data.getFullYear() + "-" + (data.getMonth() + 1) + "-" + data.getDate(),
+        nome: SEMANA[data.getDay()],
+        desc: data.getDate() + " de " + MESES[data.getMonth()],
+        diaDoMes: data.getDate(),
+        sabado: data.getDay() === 6
+      });
+    }
+    return lista;
+  }
+
+  function achar(lista, id) {
+    for (var i = 0; i < lista.length; i++) {
+      if (lista[i].id === id) { return lista[i]; }
+    }
+    return null;
+  }
+
+  /* Horários livres de exemplo: alguns saem da lista para parecer agenda de verdade. */
+  function horariosLivres(dia, turno, deslocamento) {
+    return turno.filter(function (hora, i) {
+      var ocupadoNoExemplo = (i * 5 + dia.diaDoMes * 3 + deslocamento) % 4 === 0;
+      var jaMarcadoPorVoce = consultas.some(function (c) { return c.dia === dia.id && c.hora === hora; });
+      return !ocupadoNoExemplo && !jaMarcadoPorVoce;
+    });
+  }
+
+  function criarOpcao(grupo, valor, nome, desc, marcada) {
+    var rotulo = document.createElement("label");
+    rotulo.className = "opcao" + (marcada ? " marcada" : "");
+    var campo = document.createElement("input");
+    campo.type = "radio";
+    campo.name = grupo;
+    campo.value = valor;
+    campo.checked = marcada;
+    var bolinha = document.createElement("span");
+    bolinha.className = "bolinha";
+    var texto = document.createElement("span");
+    texto.className = "opcao-texto";
+    var linhaNome = document.createElement("span");
+    linhaNome.className = "opcao-nome";
+    linhaNome.textContent = nome;
+    texto.appendChild(linhaNome);
+    if (desc) {
+      var linhaDesc = document.createElement("span");
+      linhaDesc.className = "opcao-desc";
+      linhaDesc.textContent = desc;
+      texto.appendChild(linhaDesc);
+    }
+    rotulo.appendChild(campo);
+    rotulo.appendChild(bolinha);
+    rotulo.appendChild(texto);
+    return rotulo;
+  }
+
+  function marcarVisual(caixa, grupo) {
+    var campos = caixa.querySelectorAll('input[name="' + grupo + '"]');
+    for (var i = 0; i < campos.length; i++) {
+      campos[i].parentNode.classList.toggle("marcada", campos[i].checked);
+    }
+  }
+
+  function montarEspecialidades() {
+    var caixa = el("opcoes-especialidade");
+    caixa.textContent = "";
+    ESPECIALIDADES.forEach(function (e) {
+      caixa.appendChild(criarOpcao("especialidade", e.id, e.nome, e.desc, e.id === escolha.especialidade));
+    });
+  }
+
+  function montarDias() {
+    var caixa = el("opcoes-dia");
+    caixa.textContent = "";
+    dias.forEach(function (d) {
+      caixa.appendChild(criarOpcao("dia", d.id, d.nome, d.desc, d.id === escolha.dia));
+    });
+  }
+
+  function montarHoras() {
+    var caixa = el("opcoes-hora");
+    var dia = achar(dias, escolha.dia);
+    var turnos = [{ titulo: "De manhã", horas: horariosLivres(dia, MANHA, 1) }];
+    if (!dia.sabado) {
+      turnos.push({ titulo: "À tarde", horas: horariosLivres(dia, TARDE, 2) });
+    }
+    caixa.textContent = "";
+    var total = 0;
+    turnos.forEach(function (t) {
+      if (!t.horas.length) { return; }
+      total += t.horas.length;
+      var titulo = document.createElement("h3");
+      titulo.className = "turno";
+      titulo.textContent = t.titulo;
+      var grade = document.createElement("div");
+      grade.className = "opcoes opcoes-horas";
+      t.horas.forEach(function (h) {
+        grade.appendChild(criarOpcao("hora", h, h, "", h === escolha.hora));
+      });
+      caixa.appendChild(titulo);
+      caixa.appendChild(grade);
+    });
+    if (!total) {
+      mostrarAviso("Esse dia não tem mais horário. Toque em Voltar e escolha outro dia.");
+    } else {
+      el("aviso-hora").hidden = true;
+    }
+  }
+
+  function mostrarAviso(texto) {
+    el("aviso-hora-texto").textContent = texto;
+    el("aviso-hora").hidden = false;
+    el("aviso-hora").scrollIntoView({ block: "center" });
+  }
+
+  function linhasResumo(caixa, c) {
+    var dia = achar(dias, c.dia);
+    var linhas = [
+      ["Especialidade", achar(ESPECIALIDADES, c.especialidade).nome],
+      ["Dia", dia.nome + ", " + dia.desc],
+      ["Horário", c.hora]
+    ];
+    caixa.textContent = "";
+    linhas.forEach(function (l) {
+      var linha = document.createElement("div");
+      var dt = document.createElement("dt");
+      var dd = document.createElement("dd");
+      dt.textContent = l[0];
+      dd.textContent = l[1];
+      linha.appendChild(dt);
+      linha.appendChild(dd);
+      caixa.appendChild(linha);
+    });
+  }
+
+  function montarInicio() {
+    var lista = el("lista-consultas");
+    lista.textContent = "";
+    consultas.forEach(function (c, i) {
+      var dia = achar(dias, c.dia);
+      var nome = achar(ESPECIALIDADES, c.especialidade).nome;
+      var quando = dia.nome + ", " + dia.desc + ", às " + c.hora;
+      var item = document.createElement("li");
+      item.className = "consulta";
+      var texto = document.createElement("span");
+      texto.className = "consulta-texto";
+      var forte = document.createElement("strong");
+      forte.textContent = nome;
+      texto.appendChild(forte);
+      texto.appendChild(document.createTextNode(quando));
+      var botao = document.createElement("button");
+      botao.type = "button";
+      botao.className = "botao botao-secundario";
+      botao.textContent = "Desmarcar consulta";
+      botao.setAttribute("aria-label", "Desmarcar consulta de " + nome + ", " + quando);
+      botao.setAttribute("data-desmarcar", String(i));
+      item.appendChild(texto);
+      item.appendChild(botao);
+      lista.appendChild(item);
+    });
+    el("bloco-consultas").hidden = consultas.length === 0;
+    el("bloco-desmarcada").hidden = desmarcada === null;
+  }
+
+  function irPara(nome) {
+    var indo = ORDEM.indexOf(nome) >= ORDEM.indexOf(telaAtual);
+    if (nome === "inicio") { montarInicio(); }
+    if (nome === "especialidade") { montarEspecialidades(); }
+    if (nome === "dia") { montarDias(); }
+    if (nome === "hora") { montarHoras(); }
+    if (nome === "conferir") { linhasResumo(el("resumo-conferir"), escolha); }
+
+    var antiga = el("tela-" + telaAtual);
+    var nova = el("tela-" + nome);
+    antiga.hidden = true;
+    antiga.classList.remove("entra-frente", "entra-tras");
+    nova.hidden = false;
+    nova.classList.remove("entra-frente", "entra-tras");
+    void nova.offsetWidth;
+    nova.classList.add(indo ? "entra-frente" : "entra-tras");
+    telaAtual = nome;
+
+    document.title = nova.getAttribute("data-titulo") + (nome === "inicio" ? "" : " · Clínica Vila Esperança");
+    window.scrollTo(0, 0);
+    var titulo = nova.querySelector("h1");
+    if (titulo) { titulo.focus({ preventScroll: true }); }
+  }
+
+  /* Escolhas */
+  document.addEventListener("change", function (ev) {
+    var campo = ev.target;
+    if (campo.name === "especialidade") {
+      escolha.especialidade = campo.value;
+      marcarVisual(el("opcoes-especialidade"), "especialidade");
+    }
+    if (campo.name === "dia") {
+      if (escolha.dia !== campo.value) { escolha.hora = null; }
+      escolha.dia = campo.value;
+      marcarVisual(el("opcoes-dia"), "dia");
+    }
+    if (campo.name === "hora") {
+      escolha.hora = campo.value;
+      marcarVisual(el("opcoes-hora"), "hora");
+      el("aviso-hora").hidden = true;
+    }
+  });
+
+  /* Botões */
+  document.addEventListener("click", function (ev) {
+    var botao = ev.target.closest("button");
+    if (!botao) { return; }
+
+    if (botao.hasAttribute("data-voltar")) { irPara(botao.getAttribute("data-voltar")); return; }
+    if (botao.hasAttribute("data-ir")) { irPara(botao.getAttribute("data-ir")); return; }
+
+    if (botao.id === "botao-comecar") {
+      desmarcada = null;
+      escolha.hora = null;
+      irPara("especialidade");
+      return;
+    }
+
+    if (botao.id === "botao-conferir") {
+      if (!escolha.hora) {
+        if (el("opcoes-hora").querySelector("input")) {
+          mostrarAviso("Falta escolher o horário. Toque em um deles.");
+        }
+        return;
+      }
+      irPara("conferir");
+      return;
+    }
+
+    if (botao.id === "botao-confirmar") {
+      var nova = { especialidade: escolha.especialidade, dia: escolha.dia, hora: escolha.hora };
+      consultas.push(nova);
+      desmarcada = null;
+      linhasResumo(el("resumo-pronto"), nova);
+      escolha.hora = null;
+      irPara("pronto");
+      return;
+    }
+
+    if (botao.hasAttribute("data-desmarcar")) {
+      desmarcada = consultas.splice(Number(botao.getAttribute("data-desmarcar")), 1)[0];
+      montarInicio();
+      el("botao-marcar-de-novo").focus();
+      return;
+    }
+
+    if (botao.id === "botao-marcar-de-novo" && desmarcada) {
+      consultas.push(desmarcada);
+      desmarcada = null;
+      montarInicio();
+      var botoes = el("lista-consultas").querySelectorAll("button");
+      if (botoes.length) { botoes[botoes.length - 1].focus(); }
+    }
+  });
+
+  montarInicio();
+})();
+</script>
+</body>
+</html>

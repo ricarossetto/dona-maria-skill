@@ -22,6 +22,8 @@ If one option wins by a mile, skip the debate: pick it and move on.
 
 One round only. If the judge calls it a tie, the option that is easier to undo wins.
 
+At most 3 subagent debates per task. Beyond that, decide directly by the judge's criteria.
+
 ## Debater brief
 
 ```

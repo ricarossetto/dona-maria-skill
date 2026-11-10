@@ -28,12 +28,12 @@ Nenhuma delas lê manual. Nenhuma sabe o que é "painel", "módulo", "sincroniza
 
 O alvo é a tela fácil, não a tela vazia. Tirar demais também confunde.
 
-- **Uma tela, uma tarefa.** Cada tela tem uma ação principal, visível sem rolar. As outras ações ficam visualmente mais discretas.
+- **Uma tela, uma tarefa.** Cada tela tem uma ação principal, visível sem rolar. Se a lista for longa, prenda o botão principal no rodapé da tela. As outras ações ficam visualmente mais discretas.
 - **Menos botões.** Conte os cliques da tarefa mais comum e tente tirar um. Ação rara vai para um menu "Mais"; ação que ninguém usa sai.
 - **Menos texto.** Corte todo texto que, se sumir, não deixa ninguém perdido. Títulos de até 5 palavras. Frases de até 12 palavras.
 - **Não corte o que orienta.** Mantenha sempre: onde estou, o que faço agora, como volto. Ícone sozinho, sem palavra, só para os universais (fechar, voltar, buscar).
 - **Pergunte só o necessário.** Campo que o sistema consegue descobrir sozinho não vira pergunta. Formulário longo vira passos curtos com "Passo 2 de 4".
-- **Escolha por ela.** Deixe a opção mais comum já marcada. Configuração avançada fica escondida até alguém procurar.
+- **Escolha por ela.** Deixe a opção mais comum já marcada. Não pré-marque quando errar custa caro (horário, valor, para quem vai): aí ela escolhe. Configuração avançada fica escondida até alguém procurar.
 
 ### 2. Dona Maria
 
@@ -41,8 +41,9 @@ O alvo é a tela fácil, não a tela vazia. Tirar demais também confunde.
 
 - Use a palavra que ela usa em casa: "entrar" e não "autenticar"; "guardar" ou "salvar" e não "persistir"; "apagar" e não "remover registro".
 - Nada de sigla, termo em inglês ou termo técnico na tela. Se o termo for inevitável, explique em uma frase curta na primeira vez.
-- O botão diz o que acontece: "Enviar pedido", "Apagar foto". Nunca "OK", "Confirmar" ou "Clique aqui" soltos.
-- O mesmo nome para a mesma coisa em todas as telas.
+- Nome difícil que a pessoa vai encontrar na vida real ("Cardiologista", na porta do consultório) fica, com a explicação simples junto: "Cuida do coração".
+- O botão diz o que acontece, com verbo e objeto: "Enviar pedido", "Apagar foto", "Confirmar consulta". Nunca uma palavra solta como "OK", "Confirmar", "Continuar" ou "Clique aqui".
+- O mesmo nome para a mesma coisa em todas as telas. Ações diferentes têm nomes diferentes: o botão de avançar pode mudar a cada passo ("Escolher o dia", "Escolher o horário").
 
 **Tamanho e leitura**
 
@@ -52,8 +53,8 @@ O alvo é a tela fácil, não a tela vazia. Tirar demais também confunde.
 
 **Não se perder**
 
-- Toda tela mostra onde a pessoa está e tem um "Voltar" no mesmo lugar.
-- Troca de tela com transição curta (150 a 250 ms) que mostra de onde veio e para onde foi. Nada pula, pisca ou muda de lugar sozinho.
+- Toda tela mostra onde a pessoa está e tem um "Voltar" no mesmo lugar. Duas exceções: a tela inicial não tem "Voltar", e a tela de "deu certo" leva ao início, não ao passo anterior.
+- Troca de tela com transição curta (150 a 250 ms) que mostra o sentido: a tela nova entra de um lado ao avançar e do outro ao voltar. Nada pula, pisca ou muda de lugar sozinho.
 - Depois de cada ação, a tela responde na hora: "Salvo", "Enviado". Se demorar mais de 1 segundo, mostre que está trabalhando.
 - Nada funciona só com gesto escondido (arrastar, segurar, dois toques). Sempre existe um botão visível para a mesma coisa.
 
@@ -71,11 +72,11 @@ IA costuma deixar botão torto, caixa de tamanho diferente e texto colado em bot
 - **Mesma linha.** Botões do mesmo grupo ficam na mesma linha de base, com a mesma altura.
 - **Mesmo tamanho.** Botões do mesmo grupo têm a mesma altura, o mesmo arredondamento, a mesma letra e o mesmo espaço interno. Se as larguras ficarem muito diferentes, iguale pela maior.
 - **Mesma proporção.** Cartões e caixas da mesma lista têm a mesma largura e a mesma altura na linha. Texto longo corta com reticências; não estica a caixa.
-- **Uma régua só.** Todo espaço sai de uma escala única (4, 8, 12, 16, 24, 32, 48 px). Nenhum valor solto como 13 px ou 22 px.
+- **Uma régua só.** Todo espaço entre elementos e por dentro deles sai de uma escala única (4, 8, 12, 16, 24, 32, 48 px). Nenhum valor solto como 13 px ou 22 px. Altura de botão, tamanho de letra e espessura de borda têm poucos valores fixos, repetidos em todas as telas.
 - **Um só destaque.** Um botão principal por tela. Os demais usam o estilo secundário, sempre o mesmo.
-- **Botão longe do texto.** Pelo menos 24 px entre um botão e qualquer bloco de texto. Não empilhe uma frase logo acima ou abaixo do botão.
+- **Botão longe do texto.** Pelo menos 24 px entre um botão e qualquer bloco de texto. Título e conteúdo da tela podem ficar acima do botão, com essa distância. O que não pode é uma frase de apoio grudada nele.
 - **Botão não tem legenda.** Não escreva texto na tela para explicar um botão. Se o botão precisa de explicação, o nome dele está ruim: troque o nome. Explicação extra vai na dica que aparece ao passar o mouse (`title` ou tooltip, e `aria-label` para leitor de tela).
-- **Confira medindo.** Depois de montar, abra a tela, tire um retrato e compare alturas, larguras e espaços. Olhar o código não basta.
+- **Confira medindo.** Depois de montar, abra a tela, tire um retrato e compare alturas, larguras e espaços. Sem retrato, peça as medidas ao navegador (posição e tamanho de cada elemento). Olhar o código não basta.
 
 ### 4. Sem cara de IA
 
@@ -83,7 +84,7 @@ Leia [references/sinais-de-ia.md](references/sinais-de-ia.md) antes de criar pá
 
 - **Proibida a "página inicial de GPT":** um textão gigante centralizado, com uma frase de efeito e uma palavra em itálico, etiqueta em cápsula em cima, dois botões embaixo e três cartões com ícone logo depois.
 - Proibidos por reflexo: degradê roxo ou azul-arroxeado, brilho neon, vidro fosco, texto em degradê, emoji no lugar de ícone, sombra colorida, cartão dentro de cartão.
-- Proibido inventar prova: número, depoimento, logotipo de cliente ou nota que não existem.
+- Proibido inventar prova: número, depoimento, logotipo de cliente ou nota que não existem. Dado de exemplo para a tela funcionar (nome, endereço, lista) pode, desde que você avise o usuário que é exemplo.
 - Proibido texto de vendedor: "Transforme", "Eleve", "Revolucione", "sem esforço", "Não é X. É Y.".
 - No lugar disso: mostre o produto de verdade, diga em palavras simples o que ele faz e coloque a ação principal logo no início.
 
@@ -103,7 +104,7 @@ Quem está do outro lado pode não ser programador, mesmo que use uma palavra t�
 
 ### 6. Divida o trabalho com subagentes
 
-Subagentes aceleram e melhoram o resultado. Use sempre que a tarefa tiver mais de uma parte, mesmo que ninguém tenha configurado nada.
+Subagentes aceleram e melhoram o resultado. Use sempre que a tarefa tiver partes que duas pessoas fariam ao mesmo tempo sem se atrapalhar (arquivos diferentes, pesquisa e construção, construção e teste), mesmo que ninguém tenha configurado nada.
 
 - **Procure a ferramenta.** Use o que existir no ambiente: ferramenta de agente ou tarefa, agentes em segundo plano, sessões paralelas, ou chamar o próprio agente pela linha de comando.
 - **Divida em partes independentes** e dispare todas de uma vez: pesquisa, cada tela, cada arquivo, testes, revisão.
@@ -113,7 +114,7 @@ Subagentes aceleram e melhoram o resultado. Use sempre que a tarefa tiver mais d
 - **Você responde pelo resultado.** Confira o que voltou antes de dizer que está pronto.
 - **Sem ferramenta de subagente:** faça as mesmas partes em passadas separadas, uma de cada vez, e uma passada final de revisão com olhar de quem não escreveu.
 
-Tarefa de um passo só (trocar uma palavra, responder uma pergunta) você faz direto.
+Tarefa de um passo só (trocar uma palavra, responder uma pergunta) você faz direto. Trabalho que cabe em um arquivo só você também faz direto, e chama apenas o revisor no fim.
 
 ### 7. Decida sem incomodar
 
@@ -129,13 +130,15 @@ Não volte ao humano para confirmar detalhe. Cada pergunta pequena quebra o trab
 
 Sem ferramenta de subagente, faça o debate você mesmo: escreva o melhor argumento de cada lado e depois julgue.
 
+No máximo 3 debates com subagentes por tarefa. Guarde para as dúvidas que mais pesam; as outras você decide direto, pelo critério do juiz.
+
 **Pergunte ao humano só quando:**
 
 - a ação não tem volta (apagar dados, publicar, enviar mensagem, gastar dinheiro);
 - a resposta depende de algo que só ele sabe (senha, preferência pessoal, regra do negócio);
 - o pedido tem duas leituras que levam a trabalhos muito diferentes.
 
-Nesses casos, faça uma pergunta só, com as opções prontas, e siga adiantando o que não depende da resposta.
+Nesses casos, faça uma pergunta só, com as opções prontas, e siga adiantando o que não depende da resposta. Se não houver como esperar a resposta, faça o que o pedido diz ao pé da letra e avise no fim o que ficou para o humano decidir.
 
 ## Antes de entregar: o teste da Dona Maria
 
@@ -145,7 +148,7 @@ Abra a tela de verdade e confira. Se algum item falhar, corrija antes de entrega
 2. **Uma ação principal.** Só um botão chama mais atenção que os outros?
 3. **Palavras de casa.** Tem alguma palavra que a Dona Maria não usaria? Troque.
 4. **Dedo grosso.** Tudo que se clica tem 48 px ou mais e folga dos vizinhos?
-5. **Voltar.** Em toda tela dá para voltar e desfazer?
+5. **Voltar.** Em toda tela, fora a inicial, dá para voltar e desfazer?
 6. **Régua.** Botões e caixas do mesmo grupo têm o mesmo tamanho e estão na mesma linha?
 7. **Botão sozinho.** Nenhum botão tem frase colada explicando o que ele faz?
 8. **Cara de IA.** Nenhum item da lista de sinais aparece?

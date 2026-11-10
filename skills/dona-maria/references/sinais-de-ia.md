@@ -69,6 +69,8 @@ Nunca crie, nem como exemplo provisório:
 
 Se não existe dado real, deixe sem. Avise o usuário que o espaço está pronto para receber o dado verdadeiro.
 
+Isso não proíbe dado de exemplo para a tela funcionar: nome da empresa, endereço, itens de uma lista. Esses podem, com aviso ao usuário de que são exemplo. A diferença: prova tenta convencer; exemplo só preenche.
+
 ## O que não é sinal
 
 Não saia apagando tudo. Cor forte, letra diferente, degradê e animação são bons quando têm motivo ligado ao produto. A identidade visual que já existe no projeto fica como está. O problema é a escolha feita no automático, não a escolha ousada.

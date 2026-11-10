@@ -22,6 +22,8 @@ Se uma opção ganha de longe, nem debata: escolha e siga.
 
 Uma rodada só. Se o juiz disser que empatou, vale a opção mais fácil de desfazer.
 
+No máximo 3 debates com subagentes por tarefa. Passou disso, decida direto pelos critérios do juiz.
+
 ## Pedido ao debatedor
 
 ```

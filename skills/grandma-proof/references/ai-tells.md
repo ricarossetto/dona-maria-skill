@@ -69,6 +69,8 @@ Never create, not even as a temporary example:
 
 If there is no real data, leave it out. Tell the user the slot is ready for the real data.
 
+This does not ban sample data that makes the screen work: a company name, an address, list items. Those are fine, with a note to the user that they are samples. The difference: proof tries to convince; a sample only fills in.
+
 ## What is not a tell
 
 Do not delete everything in sight. Strong color, unusual type, gradients and animation are good when they have a reason tied to the product. The visual identity already in the project stays as it is. The problem is the choice made on autopilot, not the bold choice.
