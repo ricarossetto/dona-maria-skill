@@ -31,6 +31,30 @@ Toda entrega termina com o **teste da Dona Maria**: dez conferências feitas na 
 
 ## Instalar
 
+### Um comando, em qualquer agente
+
+Funciona com Claude Code, Codex, Cursor, Copilot e outros agentes que leem skills:
+
+```bash
+npx skills@latest add ricarossetto/dona-maria-skill
+```
+
+Ele pergunta qual skill instalar (`dona-maria` ou `grandma-proof`). Para instalar uma direto:
+
+```bash
+npx skills@latest add ricarossetto/dona-maria-skill --skill dona-maria
+```
+
+Para valer em todos os projetos do seu computador, acrescente `-g`. Para escolher os agentes, use `-a`, por exemplo `-a claude-code codex`, ou `-a '*'` para todos.
+
+Para atualizar depois:
+
+```bash
+npx skills@latest update
+```
+
+Prefere instalar à mão? Veja as opções abaixo.
+
 Escolha o idioma. As duas skills têm as mesmas regras, escritas direto em cada língua.
 
 | Skill | Idioma | Pasta |

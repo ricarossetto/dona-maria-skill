@@ -31,6 +31,30 @@ Every delivery ends with the **Grandma test**: ten checks run on the real screen
 
 ## Install
 
+### One command, any agent
+
+Works with Claude Code, Codex, Cursor, Copilot and other agents that read skills:
+
+```bash
+npx skills@latest add ricarossetto/dona-maria-skill
+```
+
+It asks which skill to install (`grandma-proof` or `dona-maria`). To install one directly:
+
+```bash
+npx skills@latest add ricarossetto/dona-maria-skill --skill grandma-proof
+```
+
+To make it available in every project on your computer, add `-g`. To pick agents, use `-a`, for example `-a claude-code codex`, or `-a '*'` for all of them.
+
+To update later:
+
+```bash
+npx skills@latest update
+```
+
+Prefer to install by hand? See the options below.
+
 Pick your language. The two skills are the same rules, written natively in each language.
 
 | Skill | Language | Folder |
